@@ -2,19 +2,24 @@ spring:
   application:
     name: reactive
 
-  # Enable H2 Console
-  h2:
-    console:
-      enabled: true
-
-  # Database Configuration for H2
   r2dbc:
-    url: r2dbc:h2:mem:///testdb
+    url: r2dbc:postgresql://localhost:5432/testdb
     username: gex
-    password:
+    password: gex
+    pool:
+      initial-size: 5
+      max-size: 20
 
-  # Schema Generation
-  sql:
-    init:
-      mode: always
-      platform: h2
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+    url: jdbc:postgresql://localhost:5432/testdb
+    user: gex
+    password: gex
+    enabled: true
+
+logging:
+  level:
+    root: INFO
+
+server:
+  port: 8090

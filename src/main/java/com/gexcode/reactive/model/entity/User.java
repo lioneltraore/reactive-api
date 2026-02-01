@@ -1,8 +1,14 @@
 package com.gexcode.reactive.model.entity;
 
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
+@Data
 @Table("users")
-public record User(@Id Long id, String name, String email) {
+public class User {
+    @Id
+    private Long id;
+    private String email;
+    private String name;
 }
